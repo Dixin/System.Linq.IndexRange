@@ -17,12 +17,11 @@
     <Version>1.0.0-preview2</Version>
     <Authors>Dixin Yan</Authors>
     <Company>https://DixinYan.com</Company>
-    <Copyright>Initially ported from https://www.nuget.org/packages/EnterpriseLibrary.TransientFaultHandling</Copyright>
-    <PackageDescription>https://github.com/Dixin/EnterpriseLibrary.TransientFaultHandling.Core</PackageDescription>
-    <PackageLicenseUrl>https://github.com/Dixin/EnterpriseLibrary.TransientFaultHandling.Core/blob/master/LICENSE</PackageLicenseUrl>
-    <PackageProjectUrl>https://github.com/Dixin/EnterpriseLibrary.TransientFaultHandling.Core</PackageProjectUrl>
-    <PackageIconUrl>http://nuget.org/Media/Default/Packages/Unity/2.0/entlib_new_icon_100x100.png</PackageIconUrl>
-    <RepositoryUrl>https://github.com/Dixin/EnterpriseLibrary.TransientFaultHandling.Core.git</RepositoryUrl>
+    <Copyright>Dixin Yan https://DixinYan.com</Copyright>
+    <PackageDescription>LINQ operators to enable C# 8.0 index and range new features working with LINQ queries and any type that implements IEnumerable&lt;T&gt;.</PackageDescription>
+    <PackageLicenseUrl>https://github.com/Dixin/Linq.IndexRange</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/Dixin/Linq.IndexRange</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Dixin/Linq.IndexRange.git</RepositoryUrl>
     <PackageTags>LINQ Extensions .NET Core .NETCore 3.0 .NETCore3 .NETCore3.0 System.Linq C# 8.0 8 C#8 C#8.0 System.Index System.Range Index Range Enumerable Queryable IEnumerable IQueryable IEnumerable&lt;T&gt; IQueryable&lt;T&gt; Slice ElementAt ElementAtOrDefault ElementsIn AsEnumerable</PackageTags>
     <GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
