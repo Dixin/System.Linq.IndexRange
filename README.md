@@ -13,6 +13,14 @@ var query1 = Enumerable.Range(10..20).Select().Where();
 var query2 = (10..20).AsEnumerable().Select().Where();
 ```
 
+If adding NuGet package by command fails, please manually add it to your project file:
+
+```xml
+<ItemGroup>
+  <PackageReference Include="Linq.IndexRange" Version="1.0.0-preview2" />
+</ItemGroup>
+```
+
 Proposed these APIs to .NET Core [dotnet/corefx/#35552](https://github.com/dotnet/corefx/issues/35552).
 
 ## Problem
