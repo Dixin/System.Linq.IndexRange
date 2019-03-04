@@ -9,7 +9,7 @@ dotnet add package Linq.IndexRange
 ```cs
 var element = source1.ElementAt(index: `5);
 var elements = source2.ElementsIn(range: 10..^10); // or Slice(10..^10)
-var query1 = Enumerable.Range(10..20).Select().Where();
+var query1 = EnumerableExtensions.Range(10..20).Select().Where();
 var query2 = (10..20).AsEnumerable().Select().Where();
 ```
 
