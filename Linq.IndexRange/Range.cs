@@ -10,8 +10,8 @@ namespace System.Linq
         {
             Index startIndex = range.Start;
             Index endIndex = range.End;
-            int firstValue = startIndex.FromEnd ? int.MaxValue - startIndex.Value + 1 : startIndex.Value;
-            int lastValue = endIndex.FromEnd ? int.MaxValue - endIndex.Value : endIndex.Value - 1;
+            int firstValue = startIndex.IsFromEnd ? int.MaxValue - startIndex.Value + 1 : startIndex.Value;
+            int lastValue = endIndex.IsFromEnd ? int.MaxValue - endIndex.Value : endIndex.Value - 1;
             if (lastValue < firstValue - 1)
             {
                 // ThrowHelper.ThrowOverflowException();

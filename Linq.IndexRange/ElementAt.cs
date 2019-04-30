@@ -13,17 +13,17 @@ namespace System.Linq
                 throw new ArgumentNullException(nameof(source));
             }
 
-            if (!index.FromEnd)
+            if (!index.IsFromEnd)
             {
                 return source.ElementAt(index.Value);
             }
 
-            int indexFromEnd = index.Value;
-            if (indexFromEnd > 0)
+            int indexIsFromEnd = index.Value;
+            if (indexIsFromEnd > 0)
             {
                 if (source is IList<TSource> list)
                 {
-                    return list[list.Count - indexFromEnd];
+                    return list[list.Count - indexIsFromEnd];
                 }
 
                 using (IEnumerator<TSource> e = source.GetEnumerator())
@@ -34,7 +34,7 @@ namespace System.Linq
                         queue.Enqueue(e.Current);
                         while (e.MoveNext())
                         {
-                            if (queue.Count == indexFromEnd)
+                            if (queue.Count == indexIsFromEnd)
                             {
                                 queue.Dequeue();
                             }
@@ -42,7 +42,7 @@ namespace System.Linq
                             queue.Enqueue(e.Current);
                         }
 
-                        if (queue.Count == indexFromEnd)
+                        if (queue.Count == indexIsFromEnd)
                         {
                             return queue.Dequeue();
                         }
@@ -64,20 +64,20 @@ namespace System.Linq
 
             }
 
-            if (!index.FromEnd)
+            if (!index.IsFromEnd)
             {
                 return source.ElementAtOrDefault(index.Value);
             }
 
-            int indexFromEnd = index.Value;
-            if (indexFromEnd > 0)
+            int indexIsFromEnd = index.Value;
+            if (indexIsFromEnd > 0)
             {
                 if (source is IList<TSource> list)
                 {
                     int count = list.Count;
-                    if (count >= indexFromEnd)
+                    if (count >= indexIsFromEnd)
                     {
-                        return list[count - indexFromEnd];
+                        return list[count - indexIsFromEnd];
                     }
                 }
 
@@ -89,7 +89,7 @@ namespace System.Linq
                         queue.Enqueue(e.Current);
                         while (e.MoveNext())
                         {
-                            if (queue.Count == indexFromEnd)
+                            if (queue.Count == indexIsFromEnd)
                             {
                                 queue.Dequeue();
                             }
@@ -97,7 +97,7 @@ namespace System.Linq
                             queue.Enqueue(e.Current);
                         }
 
-                        if (queue.Count == indexFromEnd)
+                        if (queue.Count == indexIsFromEnd)
                         {
                             return queue.Dequeue();
                         }

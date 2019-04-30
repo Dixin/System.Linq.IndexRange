@@ -23,8 +23,8 @@ namespace System.Linq
             if (source is IList<TSource> list)
             {
                 int count = list.Count;
-                int firstIndex = start.FromEnd ? count - start.Value : start.Value;
-                int lastIndex = (end.FromEnd ? count - end.Value : end.Value) - 1;
+                int firstIndex = start.IsFromEnd ? count - start.Value : start.Value;
+                int lastIndex = (end.IsFromEnd ? count - end.Value : end.Value) - 1;
                 if (firstIndex >= 0 && lastIndex < count)
                 {
                     for (int currentIndex = firstIndex; currentIndex <= lastIndex; currentIndex++)
@@ -38,7 +38,7 @@ namespace System.Linq
             using (IEnumerator<TSource> e = source.GetEnumerator())
             {
                 int currentIndex = -1;
-                if (start.FromEnd)
+                if (start.IsFromEnd)
                 {
                     if (e.MoveNext())
                     {
@@ -64,7 +64,7 @@ namespace System.Linq
                         }
 
                         int firstIndex = currentIndex + 1 - takeLastCount;
-                        int lastIndex = end.FromEnd ? currentIndex - end.Value : end.Value - 1;
+                        int lastIndex = end.IsFromEnd ? currentIndex - end.Value : end.Value - 1;
                         for (int index = firstIndex; index <= lastIndex; index++)
                         {
                             yield return queue.Dequeue();
@@ -90,7 +90,7 @@ namespace System.Linq
                         yield break;
                     }
 
-                    if (end.FromEnd)
+                    if (end.IsFromEnd)
                     {
                         int skipLastCount = end.Value;
                         if (skipLastCount > 0)

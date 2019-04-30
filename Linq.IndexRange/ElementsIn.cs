@@ -23,13 +23,13 @@ namespace System.Linq
             if (source is IList<TSource> list)
             {
                 int count = list.Count;
-                if (count == 0 && range.Equals(System.Range.All()))
+                if (count == 0 && range.Equals(System.Range.All))
                 {
                     yield break;
                 }
 
-                int firstIndex = start.FromEnd ? count - start.Value : start.Value;
-                int lastIndex = (end.FromEnd ? count - end.Value : end.Value) - 1;
+                int firstIndex = start.IsFromEnd ? count - start.Value : start.Value;
+                int lastIndex = (end.IsFromEnd ? count - end.Value : end.Value) - 1;
                 if (lastIndex < firstIndex - 1)
                 {
                     // ThrowHelper.ThrowOverflowException();
@@ -58,13 +58,13 @@ namespace System.Linq
             using (IEnumerator<TSource> e = source.GetEnumerator())
             {
                 int currentIndex = -1;
-                if (start.FromEnd)
+                if (start.IsFromEnd)
                 {
                     if (!e.MoveNext())
                     {
                         const int count = 0;
                         int firstIndex = count - start.Value;
-                        int lastIndex = (end.FromEnd ? count - end.Value : end.Value) - 1;
+                        int lastIndex = (end.IsFromEnd ? count - end.Value : end.Value) - 1;
                         if (lastIndex < firstIndex - 1)
                         {
                             // ThrowHelper.ThrowOverflowException();
@@ -99,7 +99,7 @@ namespace System.Linq
                         }
 
                         int firstIndex = currentIndex + 1 - takeLastCount;
-                        int lastIndex = end.FromEnd ? currentIndex - end.Value : end.Value - 1;
+                        int lastIndex = end.IsFromEnd ? currentIndex - end.Value : end.Value - 1;
                         if (lastIndex < firstIndex - 1)
                         {
                             // ThrowHelper.ThrowOverflowException();
@@ -117,13 +117,13 @@ namespace System.Linq
                     int firstIndex = start.Value;
                     if (!e.MoveNext())
                     {
-                        if (range.Equals(System.Range.All()))
+                        if (range.Equals(System.Range.All))
                         {
                             yield break;
                         }
 
                         const int count = 0;
-                        int lastIndex = (end.FromEnd ? count - end.Value : end.Value) - 1;
+                        int lastIndex = (end.IsFromEnd ? count - end.Value : end.Value) - 1;
                         if (lastIndex < firstIndex - 1)
                         {
                             // ThrowHelper.ThrowOverflowException();
@@ -145,7 +145,7 @@ namespace System.Linq
                         throw new ArgumentOutOfRangeException(nameof(range));
                     }
 
-                    if (end.FromEnd)
+                    if (end.IsFromEnd)
                     {
                         int skipLastCount = end.Value;
                         if (skipLastCount > 0)
