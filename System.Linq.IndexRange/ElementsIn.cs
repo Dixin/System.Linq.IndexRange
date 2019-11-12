@@ -30,22 +30,10 @@ namespace System.Linq
 
                 int firstIndex = start.IsFromEnd ? count - start.Value : start.Value;
                 int lastIndex = (end.IsFromEnd ? count - end.Value : end.Value) - 1;
-                if (lastIndex < firstIndex - 1)
-                {
-                    // ThrowHelper.ThrowOverflowException();
-                    throw new OverflowException(); // Following the behavior of array with range.
-                }
-
-                if (firstIndex < 0 || lastIndex < 0)
+                if (lastIndex < firstIndex - 1 || firstIndex < 0 || lastIndex < 0 || firstIndex >= count || lastIndex >= count)
                 {
                     // ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.range);
                     throw new ArgumentOutOfRangeException(nameof(range)); // Following the behavior of array with range.
-                }
-
-                if (firstIndex >= count || lastIndex >= count)
-                {
-                    // ThrowHelper.ThrowArgumentException(ExceptionArgument.range);
-                    throw new ArgumentException(nameof(range)); // Following the behavior of array with range.
                 }
 
                 for (int currentIndex = firstIndex; currentIndex <= lastIndex; currentIndex++)
@@ -62,54 +50,43 @@ namespace System.Linq
                 {
                     if (!e.MoveNext())
                     {
-                        const int count = 0;
-                        int firstIndex = count - start.Value;
-                        int lastIndex = (end.IsFromEnd ? count - end.Value : end.Value) - 1;
-                        if (lastIndex < firstIndex - 1)
+                        // ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.range);
+                        throw new ArgumentOutOfRangeException(nameof(range)); // Following the behavior of array with range.
+                    }
+
+                    Queue<TSource> queue = new Queue<TSource>();
+                    queue.Enqueue(e.Current);
+                    currentIndex++;
+
+                    int takeLastCount = start.Value;
+                    while (e.MoveNext())
+                    {
+                        if (queue.Count == takeLastCount)
                         {
-                            // ThrowHelper.ThrowOverflowException();
-                            throw new OverflowException(); // Following the behavior of array with range.
+                            queue.Dequeue();
                         }
 
-                        // ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.range);
-                        throw new ArgumentOutOfRangeException(nameof(range));
-                    }
-                    else
-                    {
-                        Queue<TSource> queue = new Queue<TSource>();
                         queue.Enqueue(e.Current);
                         currentIndex++;
+                    }
 
-                        int takeLastCount = start.Value;
-                        while (e.MoveNext())
-                        {
-                            if (queue.Count == takeLastCount)
-                            {
-                                queue.Dequeue();
-                            }
+                    if (queue.Count < takeLastCount)
+                    {
+                        // ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.range);
+                        throw new ArgumentOutOfRangeException(nameof(range)); // Following the behavior of array with range.
+                    }
 
-                            queue.Enqueue(e.Current);
-                            currentIndex++;
-                        }
+                    int firstIndex = currentIndex + 1 - takeLastCount;
+                    int lastIndex = end.IsFromEnd ? currentIndex - end.Value : end.Value - 1;
+                    if (lastIndex < firstIndex - 1)
+                    {
+                        // ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.range);
+                        throw new ArgumentOutOfRangeException(nameof(range)); // Following the behavior of array with range.
+                    }
 
-                        if (queue.Count < takeLastCount)
-                        {
-                            // ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.range);
-                            throw new ArgumentOutOfRangeException(nameof(range));
-                        }
-
-                        int firstIndex = currentIndex + 1 - takeLastCount;
-                        int lastIndex = end.IsFromEnd ? currentIndex - end.Value : end.Value - 1;
-                        if (lastIndex < firstIndex - 1)
-                        {
-                            // ThrowHelper.ThrowOverflowException();
-                            throw new OverflowException(); // Following the behavior of array with range.
-                        }
-
-                        for (int index = firstIndex; index <= lastIndex; index++)
-                        {
-                            yield return queue.Dequeue();
-                        }
+                    for (int index = firstIndex; index <= lastIndex; index++)
+                    {
+                        yield return queue.Dequeue();
                     }
                 }
                 else
@@ -122,15 +99,8 @@ namespace System.Linq
                             yield break;
                         }
 
-                        const int count = 0;
-                        int lastIndex = (end.IsFromEnd ? count - end.Value : end.Value) - 1;
-                        if (lastIndex < firstIndex - 1)
-                        {
-                            // ThrowHelper.ThrowOverflowException();
-                            throw new OverflowException(); // Following the behavior of array with range.
-                        }
-                        // ThrowHelper.ThrowArgumentException(ExceptionArgument.range);
-                        throw new ArgumentException(nameof(range)); // Following the behavior of array with range.
+                        // ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.range);
+                        throw new ArgumentOutOfRangeException(nameof(range)); // Following the behavior of array with range.
                     }
 
                     currentIndex++;
@@ -142,7 +112,7 @@ namespace System.Linq
                     if (currentIndex != firstIndex)
                     {
                         // ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.range);
-                        throw new ArgumentOutOfRangeException(nameof(range));
+                        throw new ArgumentOutOfRangeException(nameof(range)); // Following the behavior of array with range.
                     }
 
                     if (end.IsFromEnd)
@@ -175,8 +145,8 @@ namespace System.Linq
 
                         if (firstIndex + skipLastCount > currentIndex)
                         {
-                            // ThrowHelper.ThrowOverflowException();
-                            throw new OverflowException(); // Following the behavior of array with range.
+                            // ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.range);
+                            throw new ArgumentOutOfRangeException(nameof(range)); // Following the behavior of array with range.
                         }
                     }
                     else
@@ -184,8 +154,8 @@ namespace System.Linq
                         int lastIndex = end.Value - 1;
                         if (lastIndex < firstIndex - 1)
                         {
-                            // ThrowHelper.ThrowOverflowException();
-                            throw new OverflowException(); // Following the behavior of array with range.
+                            // ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.range);
+                            throw new ArgumentOutOfRangeException(nameof(range)); // Following the behavior of array with range.
                         }
 
                         if (lastIndex == firstIndex - 1)
@@ -203,7 +173,7 @@ namespace System.Linq
                         if (currentIndex != lastIndex)
                         {
                             // ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.range);
-                            throw new ArgumentOutOfRangeException(nameof(range));
+                            throw new ArgumentOutOfRangeException(nameof(range)); // Following the behavior of array with range.
                         }
                     }
                 }

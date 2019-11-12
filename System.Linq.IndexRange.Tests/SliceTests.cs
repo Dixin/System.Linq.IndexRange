@@ -86,22 +86,22 @@ namespace Linq.Range.Tests
             Assert.IsTrue(source.Hide().Slice(^6..^6).ToArray().SequenceEqual(source[^6..^6]));
 
             // Invalid range.
-            Assert.ThrowsException<OverflowException>(() => source[3..2].ToArray());
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => source[3..2].ToArray());
             Assert.IsFalse(source.Slice(3..2).Any());
-            Assert.ThrowsException<OverflowException>(() => source[6..^5].ToArray());
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => source[6..^5].ToArray());
             Assert.IsFalse(source.Slice(6..^5).Any());
-            Assert.ThrowsException<OverflowException>(() => source[3..^8].ToArray());
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => source[3..^8].ToArray());
             Assert.IsFalse(source.Slice(3..^8).Any());
-            Assert.ThrowsException<OverflowException>(() => source[^6..^7].ToArray());
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => source[^6..^7].ToArray());
             Assert.IsFalse(source.Slice(^6..^7).Any());
 
-            Assert.ThrowsException<OverflowException>(() => source[3..2].ToArray());
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => source[3..2].ToArray());
             Assert.IsFalse(source.Hide().Slice(3..2).Any());
-            Assert.ThrowsException<OverflowException>(() => source[6..^5].ToArray());
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => source[6..^5].ToArray());
             Assert.IsFalse(source.Hide().Slice(6..^5).Any());
-            Assert.ThrowsException<OverflowException>(() => source[3..^8].ToArray());
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => source[3..^8].ToArray());
             Assert.IsFalse(source.Hide().Slice(3..^8).Any());
-            Assert.ThrowsException<OverflowException>(() => source[^6..^7].ToArray());
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => source[^6..^7].ToArray());
             Assert.IsFalse(source.Hide().Slice(^6..^7).Any());
         }
 
@@ -113,18 +113,18 @@ namespace Linq.Range.Tests
             // Multiple elements in the middle.
             Assert.ThrowsException<ArgumentOutOfRangeException>(() => source[^9..5].ToArray());
             Assert.IsFalse(source.Slice(^9..5).Any());
-            Assert.ThrowsException<ArgumentException>(() => source[2..7].ToArray());
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => source[2..7].ToArray());
             Assert.IsFalse(source.Slice(2..7).Any());
-            Assert.ThrowsException<OverflowException>(() => source[2..^4].ToArray());
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => source[2..^4].ToArray());
             Assert.IsFalse(source.Slice(2..^4).Any());
             Assert.ThrowsException<ArgumentOutOfRangeException>(() => source[^7..^4].ToArray());
             Assert.IsFalse(source.Slice(^7..^4).Any());
 
             Assert.ThrowsException<ArgumentOutOfRangeException>(() => source[^9..5].ToArray());
             Assert.IsFalse(source.Hide().Slice(^9..5).Any());
-            Assert.ThrowsException<ArgumentException>(() => source[2..7].ToArray());
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => source[2..7].ToArray());
             Assert.IsFalse(source.Hide().Slice(2..7).Any());
-            Assert.ThrowsException<OverflowException>(() => source[2..^4].ToArray());
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => source[2..^4].ToArray());
             Assert.IsFalse(source.Hide().Slice(2..^4).Any());
             Assert.ThrowsException<ArgumentOutOfRangeException>(() => source[^7..^4].ToArray());
             Assert.IsFalse(source.Hide().Slice(^7..^4).Any());
@@ -132,20 +132,20 @@ namespace Linq.Range.Tests
             // Rang with one index.
             Assert.ThrowsException<ArgumentOutOfRangeException>(() => source[^9..].ToArray());
             Assert.IsFalse(source.Slice(^9..).Any());
-            Assert.ThrowsException<OverflowException>(() => source[2..].ToArray());
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => source[2..].ToArray());
             Assert.IsFalse(source.Slice(2..).Any());
-            Assert.ThrowsException<OverflowException>(() => source[..^4].ToArray());
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => source[..^4].ToArray());
             Assert.IsFalse(source.Slice(..^4).Any());
-            Assert.ThrowsException<ArgumentException>(() => source[..6].ToArray());
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => source[..6].ToArray());
             Assert.IsFalse(source.Slice(..6).Any());
 
             Assert.ThrowsException<ArgumentOutOfRangeException>(() => source[^9..].ToArray());
             Assert.IsFalse(source.Hide().Slice(^9..).Any());
-            Assert.ThrowsException<OverflowException>(() => source[2..].ToArray());
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => source[2..].ToArray());
             Assert.IsFalse(source.Hide().Slice(2..).Any());
-            Assert.ThrowsException<OverflowException>(() => source[..^4].ToArray());
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => source[..^4].ToArray());
             Assert.IsFalse(source.Hide().Slice(..^4).Any());
-            Assert.ThrowsException<ArgumentException>(() => source[..6].ToArray());
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => source[..6].ToArray());
             Assert.IsFalse(source.Hide().Slice(..6).Any());
 
             // All.
@@ -157,18 +157,18 @@ namespace Linq.Range.Tests
             // Single element in the middle.
             Assert.ThrowsException<ArgumentOutOfRangeException>(() => source[^9..2].ToArray());
             Assert.IsFalse(source.Slice(^9..2).Any());
-            Assert.ThrowsException<ArgumentException>(() => source[2..3].ToArray());
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => source[2..3].ToArray());
             Assert.IsFalse(source.Slice(2..3).Any());
-            Assert.ThrowsException<OverflowException>(() => source[2..^7].ToArray());
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => source[2..^7].ToArray());
             Assert.IsFalse(source.Slice(2..^7).Any());
             Assert.ThrowsException<ArgumentOutOfRangeException>(() => source[^5..^4].ToArray());
             Assert.IsFalse(source.Slice(^5..^4).Any());
 
             Assert.ThrowsException<ArgumentOutOfRangeException>(() => source[^9..2].ToArray());
             Assert.IsFalse(source.Hide().Slice(^9..2).Any());
-            Assert.ThrowsException<ArgumentException>(() => source[2..3].ToArray());
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => source[2..3].ToArray());
             Assert.IsFalse(source.Hide().Slice(2..3).Any());
-            Assert.ThrowsException<OverflowException>(() => source[2..^7].ToArray());
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => source[2..^7].ToArray());
             Assert.IsFalse(source.Hide().Slice(2..^7).Any());
             Assert.ThrowsException<ArgumentOutOfRangeException>(() => source[^5..^4].ToArray());
             Assert.IsFalse(source.Hide().Slice(^5..^4).Any());
@@ -176,18 +176,18 @@ namespace Linq.Range.Tests
             // Single element at start.
             Assert.ThrowsException<ArgumentOutOfRangeException>(() => source[^10..1].ToArray());
             Assert.IsFalse(source.Slice(^10..1).Any());
-            Assert.ThrowsException<ArgumentException>(() => source[0..1].ToArray());
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => source[0..1].ToArray());
             Assert.IsFalse(source.Slice(0..1).Any());
-            Assert.ThrowsException<OverflowException>(() => source[0..^9].ToArray());
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => source[0..^9].ToArray());
             Assert.IsFalse(source.Slice(0..^9).Any());
             Assert.ThrowsException<ArgumentOutOfRangeException>(() => source[^10..^9].ToArray());
             Assert.IsFalse(source.Slice(^10..^9).Any());
 
             Assert.ThrowsException<ArgumentOutOfRangeException>(() => source[^10..1].ToArray());
             Assert.IsFalse(source.Hide().Slice(^10..1).Any());
-            Assert.ThrowsException<ArgumentException>(() => source[0..1].ToArray());
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => source[0..1].ToArray());
             Assert.IsFalse(source.Hide().Slice(0..1).Any());
-            Assert.ThrowsException<OverflowException>(() => source[0..^9].ToArray());
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => source[0..^9].ToArray());
             Assert.IsFalse(source.Hide().Slice(0..^9).Any());
             Assert.ThrowsException<ArgumentOutOfRangeException>(() => source[^10..^9].ToArray());
             Assert.IsFalse(source.Hide().Slice(^10..^9).Any());
@@ -195,39 +195,39 @@ namespace Linq.Range.Tests
             // Single element at end.
             Assert.ThrowsException<ArgumentOutOfRangeException>(() => source[^1..10].ToArray());
             Assert.IsFalse(source.Slice(^1..^10).Any());
-            Assert.ThrowsException<ArgumentException>(() => source[9..10].ToArray());
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => source[9..10].ToArray());
             Assert.IsFalse(source.Slice(9..10).Any());
-            Assert.ThrowsException<OverflowException>(() => source[9..^0].ToArray());
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => source[9..^0].ToArray());
             Assert.IsFalse(source.Slice(9..^9).Any());
             Assert.ThrowsException<ArgumentOutOfRangeException>(() => source[^1..^0].ToArray());
             Assert.IsFalse(source.Slice(^1..^9).Any());
 
             Assert.ThrowsException<ArgumentOutOfRangeException>(() => source[^1..10].ToArray());
             Assert.IsFalse(source.Hide().Slice(^1..^10).Any());
-            Assert.ThrowsException<ArgumentException>(() => source[9..10].ToArray());
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => source[9..10].ToArray());
             Assert.IsFalse(source.Hide().Slice(9..10).Any());
-            Assert.ThrowsException<OverflowException>(() => source[9..^0].ToArray());
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => source[9..^0].ToArray());
             Assert.IsFalse(source.Hide().Slice(9..^9).Any());
             Assert.ThrowsException<ArgumentOutOfRangeException>(() => source[^1..^0].ToArray());
             Assert.IsFalse(source.Hide().Slice(^1..^9).Any());
 
             // No element.
-            Assert.ThrowsException<ArgumentException>(() => source[3..3].ToArray());
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => source[3..3].ToArray());
             Assert.IsFalse(source.Slice(3..3).Any());
-            Assert.ThrowsException<OverflowException>(() => source[6..^4].ToArray());
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => source[6..^4].ToArray());
             Assert.IsFalse(source.Slice(6..^4).Any());
-            Assert.ThrowsException<OverflowException>(() => source[3..^7].ToArray());
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => source[3..^7].ToArray());
             Assert.IsFalse(source.Slice(3..^7).Any());
             Assert.ThrowsException<ArgumentOutOfRangeException>(() => source[^3..7].ToArray());
             Assert.IsFalse(source.Slice(^3..7).Any());
             Assert.ThrowsException<ArgumentOutOfRangeException>(() => source[^6..^6].ToArray());
             Assert.IsFalse(source.Slice(^6..^6).Any());
 
-            Assert.ThrowsException<ArgumentException>(() => source[3..3].ToArray());
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => source[3..3].ToArray());
             Assert.IsFalse(source.Hide().Slice(3..3).Any());
-            Assert.ThrowsException<OverflowException>(() => source[6..^4].ToArray());
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => source[6..^4].ToArray());
             Assert.IsFalse(source.Hide().Slice(6..^4).Any());
-            Assert.ThrowsException<OverflowException>(() => source[3..^7].ToArray());
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => source[3..^7].ToArray());
             Assert.IsFalse(source.Hide().Slice(3..^7).Any());
             Assert.ThrowsException<ArgumentOutOfRangeException>(() => source[^3..7].ToArray());
             Assert.IsFalse(source.Hide().Slice(^3..7).Any());
@@ -235,22 +235,22 @@ namespace Linq.Range.Tests
             Assert.IsFalse(source.Hide().Slice(^6..^6).Any());
 
             // Invalid range.
-            Assert.ThrowsException<OverflowException>(() => source[3..2].ToArray());
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => source[3..2].ToArray());
             Assert.IsFalse(source.Slice(3..2).Any());
-            Assert.ThrowsException<OverflowException>(() => source[6..^5].ToArray());
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => source[6..^5].ToArray());
             Assert.IsFalse(source.Slice(6..^5).Any());
-            Assert.ThrowsException<OverflowException>(() => source[3..^8].ToArray());
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => source[3..^8].ToArray());
             Assert.IsFalse(source.Slice(3..^8).Any());
-            Assert.ThrowsException<OverflowException>(() => source[^6..^7].ToArray());
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => source[^6..^7].ToArray());
             Assert.IsFalse(source.Slice(^6..^7).Any());
 
-            Assert.ThrowsException<OverflowException>(() => source[3..2].ToArray());
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => source[3..2].ToArray());
             Assert.IsFalse(source.Hide().Slice(3..2).Any());
-            Assert.ThrowsException<OverflowException>(() => source[6..^5].ToArray());
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => source[6..^5].ToArray());
             Assert.IsFalse(source.Hide().Slice(6..^5).Any());
-            Assert.ThrowsException<OverflowException>(() => source[3..^8].ToArray());
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => source[3..^8].ToArray());
             Assert.IsFalse(source.Hide().Slice(3..^8).Any());
-            Assert.ThrowsException<OverflowException>(() => source[^6..^7].ToArray());
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => source[^6..^7].ToArray());
             Assert.IsFalse(source.Hide().Slice(^6..^7).Any());
         }
     }

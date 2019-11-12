@@ -1,27 +1,25 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
-    <LangVersion>8.0</LangVersion>
-    <!-- <NullableReferenceTypes>true</NullableReferenceTypes> -->
-    <NullableContextOptions>enable</NullableContextOptions>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <Nullable>enable</Nullable>
     <AssemblyOriginatorKeyFile>../Tools/Key.snk</AssemblyOriginatorKeyFile>
     <SignAssembly>true</SignAssembly>
-    <AssemblyName>Linq.IndexRange</AssemblyName>
+    <AssemblyName>System.Linq.IndexRange</AssemblyName>
     <RootNamespace>System.Linq</RootNamespace>
-    <AssemblyVersion>0.9.4.0</AssemblyVersion>
-    <FileVersion>0.9.4.0</FileVersion>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
     <NeutralLanguage>en-US</NeutralLanguage>
 
     <PackageId>Linq.IndexRange</PackageId>
-    <Version>1.0.0-preview4</Version>
+    <Version>1.0.0</Version>
     <Authors>Dixin Yan</Authors>
     <Company>https://DixinYan.com</Company>
-    <Copyright>Dixin Yan https://DixinYan.com</Copyright>
+    <Copyright>Dixin Yan (c) All rights received. https://DixinYan.com</Copyright>
     <PackageDescription>LINQ operators to enable C# 8.0 index and range new features working with LINQ queries and any type that implements IEnumerable&lt;T&gt;.</PackageDescription>
-    <PackageLicenseUrl>https://github.com/Dixin/Linq.IndexRange</PackageLicenseUrl>
-    <PackageProjectUrl>https://github.com/Dixin/Linq.IndexRange</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/Dixin/Linq.IndexRange.git</RepositoryUrl>
+    <PackageLicenseUrl>https://github.com/Dixin/System.Linq.IndexRange</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/Dixin/System.Linq.IndexRange</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Dixin/System.Linq.IndexRange.git</RepositoryUrl>
     <PackageTags>LINQ Extensions .NET Core .NETCore 3.0 .NETCore3 .NETCore3.0 System.Linq C# 8.0 8 C#8 C#8.0 System.Index System.Range Index Range Enumerable Queryable IEnumerable IQueryable IEnumerable&lt;T&gt; IQueryable&lt;T&gt; Slice ElementAt ElementAtOrDefault ElementsIn AsEnumerable</PackageTags>
     <GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
