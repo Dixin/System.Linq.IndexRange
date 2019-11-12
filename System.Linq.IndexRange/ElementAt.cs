@@ -23,7 +23,7 @@ namespace System.Linq
             {
                 if (source is IList<TSource> list)
                 {
-                    return list[list.Count - indexIsFromEnd];
+                    return list[^indexIsFromEnd];
                 }
 
                 using (IEnumerator<TSource> e = source.GetEnumerator())
@@ -81,26 +81,24 @@ namespace System.Linq
                     }
                 }
 
-                using (IEnumerator<TSource> e = source.GetEnumerator())
+                using IEnumerator<TSource> e = source.GetEnumerator();
+                if (e.MoveNext())
                 {
-                    if (e.MoveNext())
+                    Queue<TSource> queue = new Queue<TSource>();
+                    queue.Enqueue(e.Current);
+                    while (e.MoveNext())
                     {
-                        Queue<TSource> queue = new Queue<TSource>();
-                        queue.Enqueue(e.Current);
-                        while (e.MoveNext())
-                        {
-                            if (queue.Count == indexIsFromEnd)
-                            {
-                                queue.Dequeue();
-                            }
-
-                            queue.Enqueue(e.Current);
-                        }
-
                         if (queue.Count == indexIsFromEnd)
                         {
-                            return queue.Dequeue();
+                            queue.Dequeue();
                         }
+
+                        queue.Enqueue(e.Current);
+                    }
+
+                    if (queue.Count == indexIsFromEnd)
+                    {
+                        return queue.Dequeue();
                     }
                 }
             }

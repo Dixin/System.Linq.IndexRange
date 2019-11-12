@@ -64,29 +64,25 @@ namespace System.Linq
         private static MethodInfo? s_ElementAt_TSource_2;
 
         public static MethodInfo ElementAt_TSource_2(Type TSource) =>
-             (s_ElementAt_TSource_2 ??
-             (s_ElementAt_TSource_2 = new Func<IQueryable<object>, Index, object>(QueryableExtensions.ElementAt).GetMethodInfo().GetGenericMethodDefinition()))
+             (s_ElementAt_TSource_2 ??= new Func<IQueryable<object>, Index, object>(QueryableExtensions.ElementAt).GetMethodInfo().GetGenericMethodDefinition())
               .MakeGenericMethod(TSource);
 
         private static MethodInfo? s_ElementAtOrDefault_TSource_2;
 
         public static MethodInfo ElementAtOrDefault_TSource_2(Type TSource) =>
-             (s_ElementAtOrDefault_TSource_2 ??
-             (s_ElementAtOrDefault_TSource_2 = new Func<IQueryable<object>, Index, object>(QueryableExtensions.ElementAtOrDefault).GetMethodInfo().GetGenericMethodDefinition()))
+             (s_ElementAtOrDefault_TSource_2 ??= new Func<IQueryable<object>, Index, object>(QueryableExtensions.ElementAtOrDefault).GetMethodInfo().GetGenericMethodDefinition())
               .MakeGenericMethod(TSource);
 
         private static MethodInfo? s_ElementsIn_TSource_2;
 
         public static MethodInfo ElementsIn_TSource_2(Type TSource) =>
-             (s_ElementsIn_TSource_2 ??
-             (s_ElementsIn_TSource_2 = new Func<IQueryable<object>, Range, IQueryable<object>>(QueryableExtensions.ElementsIn).GetMethodInfo().GetGenericMethodDefinition()))
+             (s_ElementsIn_TSource_2 ??= new Func<IQueryable<object>, Range, IQueryable<object>>(QueryableExtensions.ElementsIn).GetMethodInfo().GetGenericMethodDefinition())
               .MakeGenericMethod(TSource);
 
         private static MethodInfo? s_Slice_TSource_2;
 
         public static MethodInfo Slice_TSource_2(Type TSource) =>
-             (s_Slice_TSource_2 ??
-             (s_Slice_TSource_2 = new Func<IQueryable<object>, Range, IQueryable<object>>(QueryableExtensions.ElementsIn).GetMethodInfo().GetGenericMethodDefinition()))
+             (s_Slice_TSource_2 ??= new Func<IQueryable<object>, Range, IQueryable<object>>(QueryableExtensions.ElementsIn).GetMethodInfo().GetGenericMethodDefinition())
               .MakeGenericMethod(TSource);
     }
 }

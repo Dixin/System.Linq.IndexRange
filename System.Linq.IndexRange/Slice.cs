@@ -12,10 +12,10 @@ namespace System.Linq
                 throw new ArgumentNullException(nameof(source));
             }
 
-            return SilceIterator(source, range);
+            return SliceIterator(source, range);
         }
 
-        private static IEnumerable<TSource> SilceIterator<TSource>(IEnumerable<TSource> source, Range range)
+        private static IEnumerable<TSource> SliceIterator<TSource>(IEnumerable<TSource> source, Range range)
         {
             Index start = range.Start;
             Index end = range.End;
