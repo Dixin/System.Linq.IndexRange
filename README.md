@@ -1,5 +1,7 @@
 # Linq.IndexRange
 
+![.NET Core](https://github.com/Dixin/System.Linq.IndexRange/workflows/.NET%20Core/badge.svg)
+
 LINQ operators to enable C# 8.0 index and range new features working with LINQ queries and any type that implements `IEnumerable<T>`.
 
 ```bat
