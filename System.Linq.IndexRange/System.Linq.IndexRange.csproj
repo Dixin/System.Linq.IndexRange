@@ -23,6 +23,7 @@
     <PackageTags>LINQ Extensions .NET Core .NETCore 3.0 .NETCore3 .NETCore3.0 System.Linq C# 8.0 8 C#8 C#8.0 System.Index System.Range Index Range Enumerable Queryable IEnumerable IQueryable IEnumerable&lt;T&gt; IQueryable&lt;T&gt; Slice ElementAt ElementAtOrDefault ElementsIn AsEnumerable</PackageTags>
     <GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Description>LINQ operators to enable C# 8.0 index and range new features working with LINQ queries and any type that implements IEnumerable&lt;T&gt;.</Description>
   </PropertyGroup>
 
 </Project>
