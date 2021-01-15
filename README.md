@@ -2,17 +2,8 @@
 
 ![.NET Core](https://github.com/Dixin/System.Linq.IndexRange/workflows/.NET%20Core/badge.svg)
 
-LINQ operators to enable C# 8.0 index and range new features working with LINQ queries and any type that implements `IEnumerable<T>`.
-
-```bat
+```cmd
 dotnet add package Linq.IndexRange
-```
-
-```cs
-var element = source1.ElementAt(index: `5);
-var elements = source2.ElementsIn(range: 10..^10); // or Slice(10..^10)
-var query1 = EnumerableExtensions.Range(10..20).Select().Where();
-var query2 = (10..20).AsEnumerable().Select().Where();
 ```
 
 Proposal: https://github.com/dotnet/runtime/issues/28776
