@@ -27,111 +27,108 @@ namespace System.Linq
                 int lastIndex = (end.IsFromEnd ? count - end.Value : end.Value) - 1;
                 if (firstIndex >= 0 && lastIndex < count)
                 {
-                    for (int currentIndex = firstIndex; currentIndex <= lastIndex; currentIndex++)
+                    for (int currentListIndex = firstIndex; currentListIndex <= lastIndex; currentListIndex++)
                     {
-                        yield return list[currentIndex];
+                        yield return list[currentListIndex];
                     }
                 }
                 yield break;
             }
 
-            using (IEnumerator<TSource> e = source.GetEnumerator())
+            using IEnumerator<TSource> e = source.GetEnumerator();
+            int currentIndex = -1;
+            if (start.IsFromEnd)
             {
-                int currentIndex = -1;
-                if (start.IsFromEnd)
+                if (e.MoveNext())
                 {
-                    if (e.MoveNext())
+                    Queue<TSource> queue = new Queue<TSource>();
+                    queue.Enqueue(e.Current);
+                    currentIndex++;
+
+                    int takeLastCount = start.Value;
+                    while (e.MoveNext())
                     {
-                        Queue<TSource> queue = new Queue<TSource>();
+                        if (queue.Count == takeLastCount)
+                        {
+                            queue.Dequeue();
+                        }
+
                         queue.Enqueue(e.Current);
                         currentIndex++;
+                    }
 
-                        int takeLastCount = start.Value;
-                        while (e.MoveNext())
+                    if (queue.Count < takeLastCount)
+                    {
+                        yield break;
+                    }
+
+                    int firstIndex = currentIndex + 1 - takeLastCount;
+                    int lastIndex = end.IsFromEnd ? currentIndex - end.Value : end.Value - 1;
+                    for (int index = firstIndex; index <= lastIndex; index++)
+                    {
+                        yield return queue.Dequeue();
+                    }
+                }
+            }
+            else
+            {
+                int firstIndex = start.Value;
+                if (!e.MoveNext())
+                {
+                    yield break;
+                }
+
+                currentIndex++;
+
+                while (currentIndex < firstIndex && e.MoveNext())
+                {
+                    currentIndex++;
+                }
+
+                if (currentIndex != firstIndex)
+                {
+                    yield break;
+                }
+
+                if (end.IsFromEnd)
+                {
+                    int skipLastCount = end.Value;
+                    if (skipLastCount > 0)
+                    {
+                        Queue<TSource> queue = new Queue<TSource>();
+                        do
                         {
-                            if (queue.Count == takeLastCount)
+                            if (queue.Count == skipLastCount)
                             {
-                                queue.Dequeue();
+                                yield return queue.Dequeue();
                             }
 
                             queue.Enqueue(e.Current);
                             currentIndex++;
-                        }
-
-                        if (queue.Count < takeLastCount)
+                        } while (e.MoveNext());
+                    }
+                    else
+                    {
+                        do
                         {
-                            yield break;
-                        }
-
-                        int firstIndex = currentIndex + 1 - takeLastCount;
-                        int lastIndex = end.IsFromEnd ? currentIndex - end.Value : end.Value - 1;
-                        for (int index = firstIndex; index <= lastIndex; index++)
-                        {
-                            yield return queue.Dequeue();
-                        }
+                            yield return e.Current;
+                            currentIndex++;
+                        } while (e.MoveNext());
                     }
                 }
                 else
                 {
-                    int firstIndex = start.Value;
-                    if (!e.MoveNext())
+                    int lastIndex = end.Value - 1;
+                    if (lastIndex <= firstIndex - 1)
                     {
                         yield break;
                     }
 
-                    currentIndex++;
-                    while (currentIndex < firstIndex && e.MoveNext())
+                    yield return e.Current;
+                    while (currentIndex < lastIndex && e.MoveNext())
                     {
                         currentIndex++;
-                    }
-
-                    if (currentIndex != firstIndex)
-                    {
-                        yield break;
-                    }
-
-                    if (end.IsFromEnd)
-                    {
-                        int skipLastCount = end.Value;
-                        if (skipLastCount > 0)
-                        {
-                            Queue<TSource> queue = new Queue<TSource>();
-                            do
-                            {
-                                if (queue.Count == skipLastCount)
-                                {
-                                    yield return queue.Dequeue();
-                                }
-
-                                queue.Enqueue(e.Current);
-                                currentIndex++;
-                            }
-                            while (e.MoveNext());
-                        }
-                        else
-                        {
-                            do
-                            {
-                                yield return e.Current;
-                                currentIndex++;
-                            }
-                            while (e.MoveNext());
-                        }
-                    }
-                    else
-                    {
-                        int lastIndex = end.Value - 1;
-                        if (lastIndex <= firstIndex - 1)
-                        {
-                            yield break;
-                        }
-
                         yield return e.Current;
-                        while (currentIndex < lastIndex && e.MoveNext())
-                        {
-                            currentIndex++;
-                            yield return e.Current;
-                        }
                     }
                 }
             }
